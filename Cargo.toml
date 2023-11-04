@@ -1,5 +1,5 @@
 [package]
-name = "vars"
+name = "rust-qsieve"
 version = "0.1.0"
 edition = "2021"
 
