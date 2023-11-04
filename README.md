@@ -7,6 +7,9 @@ Rust implementation of the Quadratic Sieve.
 * [ ] Optimize prime enumeration
 * [ ] Better linear algebra
 * [ ] Parameters for >240 bits
+* [ ] Embeddable as a library
+* [ ] Option to use ECM for small factorization?
+* [ ] Option to use SQUFOF for small factorization?
 
 ## Done
 
