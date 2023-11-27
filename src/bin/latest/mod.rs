@@ -1,3 +1,4 @@
+use binary_matrix::{BinaryMatrix64, BinaryMatrixSimd};
 use lib::opt::particle_swarm_optimize;
 use lib::params::get_sieve_params;
 use lib::primes::{get_n_primes, get_primes};
@@ -8,19 +9,14 @@ use std::collections::{HashMap, HashSet};
 use std::rc::Rc;
 use std::time::Instant;
 
-mod binary_matrix;
-mod binary_matrix_simd;
-mod dmatrix;
 mod line_sieve;
 mod multiple_poly;
 mod poly;
 mod primes;
 mod smooth;
 
-use binary_matrix::*;
 use smooth::*;
 
-use crate::latest::binary_matrix_simd::BinaryMatrixSimd;
 use crate::latest::line_sieve::split_line_sieve;
 use crate::latest::multiple_poly::generate_polys;
 use crate::latest::poly::jacobi_bn;
@@ -427,7 +423,6 @@ fn run_factor(
         }
     } else {
         BinaryMatrix64::new()
-        //Box::new(DMatrix::<u8>::zeros(0, 0))
     };
     // TODO: we could repeat this since this reduces the column weight
     let extra_rows = (relations.len() as isize - cci as isize - 10).max(0) as usize;
@@ -479,7 +474,7 @@ fn run_factor(
             cci += 1;
         }
     }
-    mat.insert_rows(relations.len(), cci);
+    mat.expand(relations.len(), cci);
     for r in 0..relations.len() {
         if !mat_rows.contains_key(&r) {
             println!("Unknown row {}; aborting", r);
@@ -509,7 +504,7 @@ fn run_factor(
 
     for ki in 0..kernel.len() {
         let result_vector = kernel.get(ki).unwrap();
-        let check = mat.left_mul(result_vector).all_zero();
+        let check = mat.left_mul(result_vector).is_zero();
         if !check {
             panic!("Null vector was invalid");
         }
