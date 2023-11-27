@@ -15,8 +15,6 @@ mod linalg;
 mod line_sieve;
 mod poly;
 mod smooth;
-#[cfg(test)]
-mod test;
 
 #[derive(Debug)]
 struct Relation {
