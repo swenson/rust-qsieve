@@ -38,3 +38,28 @@ pub fn modpow32(a: u32, e: u32, p: u32) -> u32 {
     }
     return result;
 }
+
+#[cfg(test)]
+mod bench {
+    extern crate test;
+
+    use crate::nums::modpow32;
+    use crate::nums::modpow64;
+    use test::Bencher;
+
+    #[bench]
+    fn bench_modpow32(b: &mut Bencher) {
+        b.iter(|| test::black_box(modpow32(1234088719, 4109293439, 3989641949)))
+    }
+
+    #[bench]
+    fn bench_modpow64(b: &mut Bencher) {
+        b.iter(|| {
+            test::black_box(modpow64(
+                12422686881634578097,
+                2245559321401646113,
+                13729269479923652819,
+            ))
+        })
+    }
+}

@@ -5,7 +5,7 @@ use memoize::lazy_static::lazy_static;
 
 use crate::nums::{modpow64, mulmod64};
 
-const PRIME_SIEVE_SIZE: usize = 65536;
+const PRIME_SIEVE_SIZE: usize = 8192;
 
 pub fn get_n_primes(n: u64) -> Vec<u64> {
     get_all_primes().take(n as usize).collect()
@@ -58,7 +58,7 @@ impl Iterator for AllPrimes {
             for p in self.primes.iter() {
                 let mut idx = offset.next_multiple_of(*p as usize) - offset;
                 while idx < PRIME_SIEVE_SIZE * 64 {
-                    self.block[idx >> 6] |= 1<<(idx & 0x3f);
+                    self.block[idx >> 6] |= 1 << (idx & 0x3f);
                     idx += *p as usize;
                 }
             }
@@ -124,8 +124,8 @@ pub fn is_prime64(n: u64) -> bool {
     true
 }
 
-mod test {
-    #[allow(unused_imports)]
+#[cfg(test)]
+mod tests {
     use super::*;
 
     #[test]
@@ -188,5 +188,56 @@ mod test {
                 997, 1009, 1013, 1019, 1021
             ]
         );
+    }
+}
+
+#[cfg(test)]
+mod bench {
+    extern crate test;
+
+    use crate::primes::get_n_primes;
+    use crate::primes::get_primes;
+    use test::Bencher;
+
+    #[bench]
+    fn bench_get_primes_to_5k(b: &mut Bencher) {
+        b.iter(|| {
+            get_primes(5_000);
+        })
+    }
+
+    #[bench]
+    fn bench_get_primes_to_50k(b: &mut Bencher) {
+        b.iter(|| {
+            get_primes(50_000);
+        })
+    }
+
+    #[bench]
+    fn bench_get_primes_to_500k(b: &mut Bencher) {
+        b.iter(|| {
+            get_primes(500_000);
+        })
+    }
+
+    #[bench]
+    fn bench_get_5k_primes(b: &mut Bencher) {
+        b.iter(|| {
+            get_n_primes(50_000);
+        })
+    }
+
+    #[bench]
+    fn bench_get_50k_primes(b: &mut Bencher) {
+        b.iter(|| {
+            get_n_primes(50_000);
+        })
+    }
+
+    #[bench]
+    fn bench_get_500k_primes(b: &mut Bencher) {
+        b.iter(|| {
+            get_n_primes(500_000);
+        })
     }
 }

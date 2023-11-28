@@ -1,3 +1,4 @@
+#![feature(test)]
 use num_bigint::BigInt;
 use num_traits::Pow;
 use rug::Integer as Int;
