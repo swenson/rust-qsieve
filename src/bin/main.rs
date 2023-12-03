@@ -173,7 +173,7 @@ fn main() {
 mod bench {
     extern crate test;
 
-    use crate::v1::main_fun as v1_main_fun;
+    use crate::latest::main_fun as latest_main_fun;
     use crate::v2::main_fun as v2_main_fun;
     use crate::v3::main_fun as v3_main_fun;
     use crate::v4::main_fun as v4_main_fun;
@@ -182,13 +182,12 @@ mod bench {
     use crate::v7::main_fun as v7_main_fun;
     use crate::v8::main_fun as v8_main_fun;
     use crate::v9::main_fun as v9_main_fun;
-    use crate::latest::main_fun as latest_main_fun;
+    use crate::{DEFAULT_L1_CACHE_BITS, DEFAULT_LA_LANES, DEFAULT_SCAN_LANES};
     use lib::timers::Timers;
     use num_bigint::BigInt;
     use std::rc::Rc;
     use std::str::FromStr;
     use test::Bencher;
-    use crate::{DEFAULT_L1_CACHE_BITS, DEFAULT_LA_LANES, DEFAULT_SCAN_LANES};
 
     const N80: &str = "1122813492023266650422531";
     const N100: &str = "921440771183728043661609546101";
@@ -216,7 +215,16 @@ mod bench {
         let num = BigInt::from_str(N80).unwrap();
         let timers = Rc::new(Timers::new());
         b.iter(|| {
-            test::black_box(v2_main_fun(&num, timers.clone(), false, false, 1, 1, DEFAULT_L1_CACHE_BITS, false));
+            test::black_box(v2_main_fun(
+                &num,
+                timers.clone(),
+                false,
+                false,
+                1,
+                1,
+                DEFAULT_L1_CACHE_BITS,
+                false,
+            ));
         });
     }
 
@@ -225,7 +233,16 @@ mod bench {
         let num = BigInt::from_str(N80).unwrap();
         let timers = Rc::new(Timers::new());
         b.iter(|| {
-            test::black_box(v3_main_fun(&num, timers.clone(), false, false, 1, 1, DEFAULT_L1_CACHE_BITS, false));
+            test::black_box(v3_main_fun(
+                &num,
+                timers.clone(),
+                false,
+                false,
+                1,
+                1,
+                DEFAULT_L1_CACHE_BITS,
+                false,
+            ));
         });
     }
 
@@ -243,7 +260,16 @@ mod bench {
         let num = BigInt::from_str(N80).unwrap();
         let timers = Rc::new(Timers::new());
         b.iter(|| {
-            test::black_box(v5_main_fun(&num, timers.clone(), false, false, 1, 1, DEFAULT_L1_CACHE_BITS, false));
+            test::black_box(v5_main_fun(
+                &num,
+                timers.clone(),
+                false,
+                false,
+                1,
+                1,
+                DEFAULT_L1_CACHE_BITS,
+                false,
+            ));
         });
     }
 
@@ -252,7 +278,16 @@ mod bench {
         let num = BigInt::from_str(N80).unwrap();
         let timers = Rc::new(Timers::new());
         b.iter(|| {
-            test::black_box(v6_main_fun(&num, timers.clone(), false, false, 1, 1, DEFAULT_L1_CACHE_BITS, false));
+            test::black_box(v6_main_fun(
+                &num,
+                timers.clone(),
+                false,
+                false,
+                1,
+                1,
+                DEFAULT_L1_CACHE_BITS,
+                false,
+            ));
         });
     }
 
@@ -261,7 +296,16 @@ mod bench {
         let num = BigInt::from_str(N80).unwrap();
         let timers = Rc::new(Timers::new());
         b.iter(|| {
-            test::black_box(v7_main_fun(&num, timers.clone(), false, false, 1, 1, DEFAULT_L1_CACHE_BITS, false));
+            test::black_box(v7_main_fun(
+                &num,
+                timers.clone(),
+                false,
+                false,
+                1,
+                1,
+                DEFAULT_L1_CACHE_BITS,
+                false,
+            ));
         });
     }
 
@@ -270,7 +314,16 @@ mod bench {
         let num = BigInt::from_str(N80).unwrap();
         let timers = Rc::new(Timers::new());
         b.iter(|| {
-            test::black_box(v8_main_fun(&num, timers.clone(), false, false, 1, 1, DEFAULT_L1_CACHE_BITS, false));
+            test::black_box(v8_main_fun(
+                &num,
+                timers.clone(),
+                false,
+                false,
+                1,
+                1,
+                DEFAULT_L1_CACHE_BITS,
+                false,
+            ));
         });
     }
 
@@ -279,7 +332,16 @@ mod bench {
         let num = BigInt::from_str(N80).unwrap();
         let timers = Rc::new(Timers::new());
         b.iter(|| {
-            test::black_box(v9_main_fun(&num, timers.clone(), false, false, 1, 1, DEFAULT_L1_CACHE_BITS, false));
+            test::black_box(v9_main_fun(
+                &num,
+                timers.clone(),
+                false,
+                false,
+                1,
+                1,
+                DEFAULT_L1_CACHE_BITS,
+                false,
+            ));
         });
     }
 
@@ -288,7 +350,16 @@ mod bench {
         let num = BigInt::from_str(N80).unwrap();
         let timers = Rc::new(Timers::new());
         b.iter(|| {
-            test::black_box(latest_main_fun(&num, timers.clone(), true, true, DEFAULT_LA_LANES, DEFAULT_SCAN_LANES, DEFAULT_L1_CACHE_BITS, false));
+            test::black_box(latest_main_fun(
+                &num,
+                timers.clone(),
+                true,
+                true,
+                DEFAULT_LA_LANES,
+                DEFAULT_SCAN_LANES,
+                DEFAULT_L1_CACHE_BITS,
+                false,
+            ));
         });
     }
 
@@ -308,7 +379,16 @@ mod bench {
         let num = BigInt::from_str(N100).unwrap();
         let timers = Rc::new(Timers::new());
         b.iter(|| {
-            test::black_box(v2_main_fun(&num, timers.clone(), false, false, 1, 1, DEFAULT_L1_CACHE_BITS, false));
+            test::black_box(v2_main_fun(
+                &num,
+                timers.clone(),
+                false,
+                false,
+                1,
+                1,
+                DEFAULT_L1_CACHE_BITS,
+                false,
+            ));
         });
     }
 
@@ -317,7 +397,16 @@ mod bench {
         let num = BigInt::from_str(N100).unwrap();
         let timers = Rc::new(Timers::new());
         b.iter(|| {
-            test::black_box(v3_main_fun(&num, timers.clone(), false, false, 1, 1, DEFAULT_L1_CACHE_BITS, false));
+            test::black_box(v3_main_fun(
+                &num,
+                timers.clone(),
+                false,
+                false,
+                1,
+                1,
+                DEFAULT_L1_CACHE_BITS,
+                false,
+            ));
         });
     }
 
@@ -326,7 +415,16 @@ mod bench {
         let num = BigInt::from_str(N100).unwrap();
         let timers = Rc::new(Timers::new());
         b.iter(|| {
-            test::black_box(v4_main_fun(&num, timers.clone(), false, false, 1, 1, DEFAULT_L1_CACHE_BITS, false));
+            test::black_box(v4_main_fun(
+                &num,
+                timers.clone(),
+                false,
+                false,
+                1,
+                1,
+                DEFAULT_L1_CACHE_BITS,
+                false,
+            ));
         });
     }
 
@@ -335,7 +433,16 @@ mod bench {
         let num = BigInt::from_str(N100).unwrap();
         let timers = Rc::new(Timers::new());
         b.iter(|| {
-            test::black_box(v5_main_fun(&num, timers.clone(), false, false, 1, 1, DEFAULT_L1_CACHE_BITS, false));
+            test::black_box(v5_main_fun(
+                &num,
+                timers.clone(),
+                false,
+                false,
+                1,
+                1,
+                DEFAULT_L1_CACHE_BITS,
+                false,
+            ));
         });
     }
 
@@ -344,7 +451,16 @@ mod bench {
         let num = BigInt::from_str(N100).unwrap();
         let timers = Rc::new(Timers::new());
         b.iter(|| {
-            test::black_box(v6_main_fun(&num, timers.clone(), false, false, 1, 1, DEFAULT_L1_CACHE_BITS, false));
+            test::black_box(v6_main_fun(
+                &num,
+                timers.clone(),
+                false,
+                false,
+                1,
+                1,
+                DEFAULT_L1_CACHE_BITS,
+                false,
+            ));
         });
     }
 
@@ -353,7 +469,16 @@ mod bench {
         let num = BigInt::from_str(N100).unwrap();
         let timers = Rc::new(Timers::new());
         b.iter(|| {
-            test::black_box(v7_main_fun(&num, timers.clone(), false, false, 1, 1, DEFAULT_L1_CACHE_BITS, false));
+            test::black_box(v7_main_fun(
+                &num,
+                timers.clone(),
+                false,
+                false,
+                1,
+                1,
+                DEFAULT_L1_CACHE_BITS,
+                false,
+            ));
         });
     }
 
@@ -362,7 +487,16 @@ mod bench {
         let num = BigInt::from_str(N100).unwrap();
         let timers = Rc::new(Timers::new());
         b.iter(|| {
-            test::black_box(v8_main_fun(&num, timers.clone(), false, false, 1, 1, DEFAULT_L1_CACHE_BITS, false));
+            test::black_box(v8_main_fun(
+                &num,
+                timers.clone(),
+                false,
+                false,
+                1,
+                1,
+                DEFAULT_L1_CACHE_BITS,
+                false,
+            ));
         });
     }
 
@@ -371,7 +505,16 @@ mod bench {
         let num = BigInt::from_str(N100).unwrap();
         let timers = Rc::new(Timers::new());
         b.iter(|| {
-            test::black_box(v9_main_fun(&num, timers.clone(), false, false, 1, 1, DEFAULT_L1_CACHE_BITS, false));
+            test::black_box(v9_main_fun(
+                &num,
+                timers.clone(),
+                false,
+                false,
+                1,
+                1,
+                DEFAULT_L1_CACHE_BITS,
+                false,
+            ));
         });
     }
 
@@ -380,7 +523,16 @@ mod bench {
         let num = BigInt::from_str(N100).unwrap();
         let timers = Rc::new(Timers::new());
         b.iter(|| {
-            test::black_box(latest_main_fun(&num, timers.clone(), true, true, 64, 16, DEFAULT_L1_CACHE_BITS, false));
+            test::black_box(latest_main_fun(
+                &num,
+                timers.clone(),
+                true,
+                true,
+                64,
+                16,
+                DEFAULT_L1_CACHE_BITS,
+                false,
+            ));
         });
     }
 
@@ -389,7 +541,16 @@ mod bench {
         let num = BigInt::from_str(N120).unwrap();
         let timers = Rc::new(Timers::new());
         b.iter(|| {
-            test::black_box(v2_main_fun(&num, timers.clone(), false, false, 1, 1, DEFAULT_L1_CACHE_BITS, false));
+            test::black_box(v2_main_fun(
+                &num,
+                timers.clone(),
+                false,
+                false,
+                1,
+                1,
+                DEFAULT_L1_CACHE_BITS,
+                false,
+            ));
         });
     }
 
@@ -398,7 +559,16 @@ mod bench {
         let num = BigInt::from_str(N120).unwrap();
         let timers = Rc::new(Timers::new());
         b.iter(|| {
-            test::black_box(v3_main_fun(&num, timers.clone(), false, false, 1, 1, DEFAULT_L1_CACHE_BITS, false));
+            test::black_box(v3_main_fun(
+                &num,
+                timers.clone(),
+                false,
+                false,
+                1,
+                1,
+                DEFAULT_L1_CACHE_BITS,
+                false,
+            ));
         });
     }
 
@@ -407,7 +577,16 @@ mod bench {
         let num = BigInt::from_str(N120).unwrap();
         let timers = Rc::new(Timers::new());
         b.iter(|| {
-            test::black_box(v4_main_fun(&num, timers.clone(), false, false, 1, 1, DEFAULT_L1_CACHE_BITS, false));
+            test::black_box(v4_main_fun(
+                &num,
+                timers.clone(),
+                false,
+                false,
+                1,
+                1,
+                DEFAULT_L1_CACHE_BITS,
+                false,
+            ));
         });
     }
 
@@ -416,7 +595,16 @@ mod bench {
         let num = BigInt::from_str(N120).unwrap();
         let timers = Rc::new(Timers::new());
         b.iter(|| {
-            test::black_box(v5_main_fun(&num, timers.clone(), false, false, 1, 1, DEFAULT_L1_CACHE_BITS, false));
+            test::black_box(v5_main_fun(
+                &num,
+                timers.clone(),
+                false,
+                false,
+                1,
+                1,
+                DEFAULT_L1_CACHE_BITS,
+                false,
+            ));
         });
     }
 
@@ -425,7 +613,16 @@ mod bench {
         let num = BigInt::from_str(N140).unwrap();
         let timers = Rc::new(Timers::new());
         b.iter(|| {
-            test::black_box(v5_main_fun(&num, timers.clone(), false, false, 1, 1, DEFAULT_L1_CACHE_BITS, false));
+            test::black_box(v5_main_fun(
+                &num,
+                timers.clone(),
+                false,
+                false,
+                1,
+                1,
+                DEFAULT_L1_CACHE_BITS,
+                false,
+            ));
         });
     }
 
@@ -434,7 +631,16 @@ mod bench {
         let num = BigInt::from_str(N120).unwrap();
         let timers = Rc::new(Timers::new());
         b.iter(|| {
-            test::black_box(v6_main_fun(&num, timers.clone(), false, false, 1, 1, DEFAULT_L1_CACHE_BITS, false));
+            test::black_box(v6_main_fun(
+                &num,
+                timers.clone(),
+                false,
+                false,
+                1,
+                1,
+                DEFAULT_L1_CACHE_BITS,
+                false,
+            ));
         });
     }
 
@@ -443,7 +649,16 @@ mod bench {
         let num = BigInt::from_str(N140).unwrap();
         let timers = Rc::new(Timers::new());
         b.iter(|| {
-            test::black_box(v6_main_fun(&num, timers.clone(), false, false, 1, 1, DEFAULT_L1_CACHE_BITS, false));
+            test::black_box(v6_main_fun(
+                &num,
+                timers.clone(),
+                false,
+                false,
+                1,
+                1,
+                DEFAULT_L1_CACHE_BITS,
+                false,
+            ));
         });
     }
 
@@ -452,7 +667,16 @@ mod bench {
         let num = BigInt::from_str(N120).unwrap();
         let timers = Rc::new(Timers::new());
         b.iter(|| {
-            test::black_box(v7_main_fun(&num, timers.clone(), false, false, 1, 1, DEFAULT_L1_CACHE_BITS, false));
+            test::black_box(v7_main_fun(
+                &num,
+                timers.clone(),
+                false,
+                false,
+                1,
+                1,
+                DEFAULT_L1_CACHE_BITS,
+                false,
+            ));
         });
     }
 
@@ -461,17 +685,34 @@ mod bench {
         let num = BigInt::from_str(N140).unwrap();
         let timers = Rc::new(Timers::new());
         b.iter(|| {
-            test::black_box(v7_main_fun(&num, timers.clone(), false, false, 1, 1, DEFAULT_L1_CACHE_BITS, false));
+            test::black_box(v7_main_fun(
+                &num,
+                timers.clone(),
+                false,
+                false,
+                1,
+                1,
+                DEFAULT_L1_CACHE_BITS,
+                false,
+            ));
         });
     }
-
 
     #[bench]
     fn bench_v8_120(b: &mut Bencher) {
         let num = BigInt::from_str(N120).unwrap();
         let timers = Rc::new(Timers::new());
         b.iter(|| {
-            test::black_box(v8_main_fun(&num, timers.clone(), false, false, 1, 1, DEFAULT_L1_CACHE_BITS, false));
+            test::black_box(v8_main_fun(
+                &num,
+                timers.clone(),
+                false,
+                false,
+                1,
+                1,
+                DEFAULT_L1_CACHE_BITS,
+                false,
+            ));
         });
     }
 
@@ -480,7 +721,16 @@ mod bench {
         let num = BigInt::from_str(N140).unwrap();
         let timers = Rc::new(Timers::new());
         b.iter(|| {
-            test::black_box(v8_main_fun(&num, timers.clone(), false, false, 1, 1, DEFAULT_L1_CACHE_BITS, false));
+            test::black_box(v8_main_fun(
+                &num,
+                timers.clone(),
+                false,
+                false,
+                1,
+                1,
+                DEFAULT_L1_CACHE_BITS,
+                false,
+            ));
         });
     }
 
@@ -489,7 +739,16 @@ mod bench {
         let num = BigInt::from_str(N120).unwrap();
         let timers = Rc::new(Timers::new());
         b.iter(|| {
-            test::black_box(v9_main_fun(&num, timers.clone(), false, false, 1, 1, DEFAULT_L1_CACHE_BITS, false));
+            test::black_box(v9_main_fun(
+                &num,
+                timers.clone(),
+                false,
+                false,
+                1,
+                1,
+                DEFAULT_L1_CACHE_BITS,
+                false,
+            ));
         });
     }
 
@@ -498,7 +757,16 @@ mod bench {
         let num = BigInt::from_str(N140).unwrap();
         let timers = Rc::new(Timers::new());
         b.iter(|| {
-            test::black_box(v9_main_fun(&num, timers.clone(), false, false, 1, 1, DEFAULT_L1_CACHE_BITS, false));
+            test::black_box(v9_main_fun(
+                &num,
+                timers.clone(),
+                false,
+                false,
+                1,
+                1,
+                DEFAULT_L1_CACHE_BITS,
+                false,
+            ));
         });
     }
 
@@ -507,7 +775,16 @@ mod bench {
         let num = BigInt::from_str(N160).unwrap();
         let timers = Rc::new(Timers::new());
         b.iter(|| {
-            test::black_box(v9_main_fun(&num, timers.clone(), false, false, 1, 1, DEFAULT_L1_CACHE_BITS, false));
+            test::black_box(v9_main_fun(
+                &num,
+                timers.clone(),
+                false,
+                false,
+                1,
+                1,
+                DEFAULT_L1_CACHE_BITS,
+                false,
+            ));
         });
     }
 
@@ -516,7 +793,16 @@ mod bench {
         let num = BigInt::from_str(N120).unwrap();
         let timers = Rc::new(Timers::new());
         b.iter(|| {
-            test::black_box(latest_main_fun(&num, timers.clone(), true, true, DEFAULT_LA_LANES, DEFAULT_SCAN_LANES, DEFAULT_L1_CACHE_BITS, false));
+            test::black_box(latest_main_fun(
+                &num,
+                timers.clone(),
+                true,
+                true,
+                DEFAULT_LA_LANES,
+                DEFAULT_SCAN_LANES,
+                DEFAULT_L1_CACHE_BITS,
+                false,
+            ));
         });
     }
 
@@ -525,7 +811,16 @@ mod bench {
         let num = BigInt::from_str(N140).unwrap();
         let timers = Rc::new(Timers::new());
         b.iter(|| {
-            test::black_box(latest_main_fun(&num, timers.clone(), true, true, DEFAULT_LA_LANES, DEFAULT_SCAN_LANES, DEFAULT_L1_CACHE_BITS, false));
+            test::black_box(latest_main_fun(
+                &num,
+                timers.clone(),
+                true,
+                true,
+                DEFAULT_LA_LANES,
+                DEFAULT_SCAN_LANES,
+                DEFAULT_L1_CACHE_BITS,
+                false,
+            ));
         });
     }
 
@@ -534,7 +829,16 @@ mod bench {
         let num = BigInt::from_str(N160).unwrap();
         let timers = Rc::new(Timers::new());
         b.iter(|| {
-            test::black_box(latest_main_fun(&num, timers.clone(), true, true, DEFAULT_LA_LANES, DEFAULT_SCAN_LANES, DEFAULT_L1_CACHE_BITS, false));
+            test::black_box(latest_main_fun(
+                &num,
+                timers.clone(),
+                true,
+                true,
+                DEFAULT_LA_LANES,
+                DEFAULT_SCAN_LANES,
+                DEFAULT_L1_CACHE_BITS,
+                false,
+            ));
         });
     }
 
@@ -543,7 +847,16 @@ mod bench {
         let num = BigInt::from_str(N180).unwrap();
         let timers = Rc::new(Timers::new());
         b.iter(|| {
-            test::black_box(latest_main_fun(&num, timers.clone(), true, true, DEFAULT_LA_LANES, DEFAULT_SCAN_LANES, DEFAULT_L1_CACHE_BITS, false));
+            test::black_box(latest_main_fun(
+                &num,
+                timers.clone(),
+                true,
+                true,
+                DEFAULT_LA_LANES,
+                DEFAULT_SCAN_LANES,
+                DEFAULT_L1_CACHE_BITS,
+                false,
+            ));
         });
     }
 
@@ -552,7 +865,16 @@ mod bench {
         let num = BigInt::from_str(N200).unwrap();
         let timers = Rc::new(Timers::new());
         b.iter(|| {
-            test::black_box(latest_main_fun(&num, timers.clone(), true, true, DEFAULT_LA_LANES, DEFAULT_SCAN_LANES, DEFAULT_L1_CACHE_BITS, false));
+            test::black_box(latest_main_fun(
+                &num,
+                timers.clone(),
+                true,
+                true,
+                DEFAULT_LA_LANES,
+                DEFAULT_SCAN_LANES,
+                DEFAULT_L1_CACHE_BITS,
+                false,
+            ));
         });
     }
 
@@ -561,7 +883,16 @@ mod bench {
         let num = BigInt::from_str(N220).unwrap();
         let timers = Rc::new(Timers::new());
         b.iter(|| {
-            test::black_box(latest_main_fun(&num, timers.clone(), true, true, DEFAULT_LA_LANES, DEFAULT_SCAN_LANES, DEFAULT_L1_CACHE_BITS, false));
+            test::black_box(latest_main_fun(
+                &num,
+                timers.clone(),
+                true,
+                true,
+                DEFAULT_LA_LANES,
+                DEFAULT_SCAN_LANES,
+                DEFAULT_L1_CACHE_BITS,
+                false,
+            ));
         });
     }
 
@@ -570,7 +901,16 @@ mod bench {
         let num = BigInt::from_str(N240).unwrap();
         let timers = Rc::new(Timers::new());
         b.iter(|| {
-            test::black_box(latest_main_fun(&num, timers.clone(), true, true, DEFAULT_LA_LANES, DEFAULT_SCAN_LANES, DEFAULT_L1_CACHE_BITS, false));
+            test::black_box(latest_main_fun(
+                &num,
+                timers.clone(),
+                true,
+                true,
+                DEFAULT_LA_LANES,
+                DEFAULT_SCAN_LANES,
+                DEFAULT_L1_CACHE_BITS,
+                false,
+            ));
         });
     }
 }

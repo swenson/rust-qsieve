@@ -13,7 +13,7 @@ name = "lib"
 path = "src/lib.rs"
 
 [dependencies]
-binary_matrix = { version = "0.1.1", features = ["rand", "simd"] }
+binary_matrix = { version = "0.1.4", features = ["rand", "simd"] }
 anstream = "=0.4.0"
 bitvector = "0.1.5"
 nalgebra = { version = "0.32.2", features = ["matrixmultiply"] }

@@ -1,4 +1,4 @@
-use binary_matrix::{BinaryMatrix64, BinaryMatrixSimd};
+use binary_matrix::{BinaryMatrix, BinaryMatrix64, BinaryMatrixSimd};
 use lib::opt::particle_swarm_optimize;
 use lib::params::get_sieve_params;
 use lib::primes::{get_n_primes, get_primes};
@@ -412,13 +412,13 @@ fn run_factor(
     }
     let mut mat = if use_simd {
         match la_lanes {
-            1 => BinaryMatrixSimd::<1>::new(),
-            2 => BinaryMatrixSimd::<2>::new(),
-            4 => BinaryMatrixSimd::<4>::new(),
-            8 => BinaryMatrixSimd::<8>::new(),
-            16 => BinaryMatrixSimd::<16>::new(),
-            32 => BinaryMatrixSimd::<32>::new(),
-            64 => BinaryMatrixSimd::<64>::new(),
+            1 => BinaryMatrixSimd::<1>::new() as Box<dyn BinaryMatrix>,
+            2 => BinaryMatrixSimd::<2>::new() as Box<dyn BinaryMatrix>,
+            4 => BinaryMatrixSimd::<4>::new() as Box<dyn BinaryMatrix>,
+            8 => BinaryMatrixSimd::<8>::new() as Box<dyn BinaryMatrix>,
+            16 => BinaryMatrixSimd::<16>::new() as Box<dyn BinaryMatrix>,
+            32 => BinaryMatrixSimd::<32>::new() as Box<dyn BinaryMatrix>,
+            64 => BinaryMatrixSimd::<64>::new() as Box<dyn BinaryMatrix>,
             _ => panic!("Invalid la lanes {}", la_lanes),
         }
     } else {
