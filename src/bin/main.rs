@@ -2,7 +2,6 @@
 #![feature(portable_simd)]
 #![feature(bigint_helper_methods)]
 #![feature(int_roundings)]
-#![feature(new_uninit)]
 #![feature(ptr_sub_ptr)]
 
 use clap::{Parser, Subcommand};

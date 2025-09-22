@@ -4,8 +4,9 @@ use memoize::lazy_static::lazy_static;
 use num_integer::Integer;
 use num_traits::{FromPrimitive, One, Signed, Zero};
 use rug::{Complete, Integer as Int};
+use std::simd::cmp::SimdPartialOrd;
 use std::simd::{LaneCount, Simd, SupportedLaneCount};
-use std::{collections::HashSet, rc::Rc, simd::SimdPartialOrd, time::Instant};
+use std::{collections::HashSet, rc::Rc, time::Instant};
 
 #[derive(Debug, Clone)]
 pub struct Relation {
@@ -17,7 +18,7 @@ pub struct Relation {
 #[derive(Debug, Clone)]
 pub struct TinyPrimes {
     pub prod: u64,
-    pub big_prod: Int,
+    pub _big_prod: Int,
     pub primes: Vec<u64>,
 }
 
@@ -44,7 +45,7 @@ impl TinyPrimes {
         }
         TinyPrimes {
             prod,
-            big_prod: Int::from(prod),
+            _big_prod: Int::from(prod),
             primes,
         }
     }

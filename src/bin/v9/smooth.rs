@@ -15,7 +15,7 @@ pub fn jacobi(aa: u64, mm: u64) -> i8 {
 #[derive(Debug, Clone)]
 pub struct TinyPrimes {
     pub prod: u64,
-    pub big_prod: Int,
+    pub _big_prod: Int,
     pub primes: Vec<u64>,
 }
 
@@ -42,7 +42,7 @@ impl TinyPrimes {
         }
         TinyPrimes {
             prod,
-            big_prod: Int::from(prod),
+            _big_prod: Int::from(prod),
             primes,
         }
     }
